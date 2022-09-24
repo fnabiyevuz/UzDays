@@ -1,0 +1,175 @@
+    {% extends 'base.html' %}
+    {% load static %}
+    {% block title %}
+      <title>Uzdays | {{ category }}</title>
+    {% endblock title %}
+    {% block content %}
+    <!-- Breadcrumbs -->
+    <div class="container">
+      <ul class="breadcrumbs">
+        <li class="breadcrumbs__item">
+          <a href="/" class="breadcrumbs__url">Bosh Sahifa</a>
+        </li>
+        <li class="breadcrumbs__item breadcrumbs__item--current">
+          <a href="" class="breadcrumbs__url">{{ category }}</a>
+        </li>
+{#        <li class="breadcrumbs__item breadcrumbs__item--current">#}
+{#          World#}
+{#        </li>#}
+      </ul>
+    </div>
+    
+
+    <div class="main-container container" id="main-container">         
+
+      <!-- Content -->
+      <div class="row">
+
+        <!-- Posts -->
+        <div class="col-lg-8 blog__content mb-72">
+{#          <h1 class="page-title">World</h1>#}
+
+          <div class="row card-row">
+            {% for article in articles %}
+                <div class="col-md-6">
+                  <article class="entry card">
+                    <div class="entry__img-holder card__img-holder">
+                      <a href="/article/{{ article.date|date:'Y' }}/{{ article.date|date:'m' }}/{{ article.date|date:'d' }}/{{ article.slug }}/">
+                        <div class="thumb-container thumb-70">
+                          <img data-src="{{ article.photo.url }}" src="{{ article.photo.url }}" class="entry__img lazyload" alt="" />
+                        </div>
+                      </a>
+                      <a href="/article/{{ article.date|date:'Y' }}/{{ article.date|date:'m' }}/{{ article.date|date:'d' }}/{{ article.slug }}/" class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--{{ article.category.color }}">{{ article.category }}</a>
+                    </div>
+
+                    <div class="entry__body card__body">
+                      <div class="entry__header">
+                        <h2 class="entry__title">
+                          <a href="/article/{{ article.date|date:'Y' }}/{{ article.date|date:'m' }}/{{ article.date|date:'d' }}/{{ article.slug }}/">{{ article.name }}</a>
+                        </h2>
+                        <ul class="entry__meta">
+                          <li class="entry__meta-author">
+                            <span>by</span>
+                            <a href="">{{ article.user }}</a>
+                          </li>
+                          <li class="entry__meta-date">
+                            {{ article.date|date:'h:m d.m.Y' }}
+                          </li>
+                          <li class="entry__meta-date">
+                            <i class="ui-eye"></i>{{ article.views }}
+                          </li>
+
+                        </ul>
+                      </div>
+                      <div class="entry__excerpt">
+                        <a href="/article/{{ article.date|date:'Y' }}/{{ article.date|date:'m' }}/{{ article.date|date:'d' }}/{{ article.slug }}/"><p>{{ article.title|truncatechars:70 }}</p></a>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+            {% endfor %}
+          </div>
+          <!-- Pagination -->
+            {% if articles.has_other_pages %}
+              <nav class="pagination">
+                {% if articles.has_previous %}
+                    <a href="?page={{ articles.previous_page_number }}" class="pagination__page pagination__icon pagination__page--previous"><i class="ui-arrow-left"></i></a>
+                {% else %}
+                {% endif %}
+                {% for i in articles.paginator.page_range %}
+                  {% if articles.number == i %}
+                      <span class="pagination__page pagination__page--current">{{ i }}</span>
+                  {% else %}
+                      <a href="?page={{ i }}" class="pagination__page">{{ i }}</a>
+                  {% endif %}
+                {% endfor %}
+                {% if articles.has_next %}
+                    <a href="?page={{ articles.next_page_number }}" class="pagination__page pagination__icon pagination__page--next"><i class="ui-arrow-right"></i></a>
+                {% else %}
+                {% endif %}
+              </nav>
+            {% endif %}
+        </div> <!-- end posts -->
+
+        <!-- Sidebar -->
+        <aside class="col-lg-4 sidebar sidebar--right">
+
+          <!-- Widget Popular Posts -->
+          <aside class="widget widget-popular-posts">
+            <h4 class="widget-title">Dolzarb mavzular</h4>
+            <ul class="post-list-small">
+                {% for top in views %}
+                  <li class="post-list-small__item">
+                    <article class="post-list-small__entry clearfix">
+                      <div class="post-list-small__img-holder">
+                        <div class="thumb-container thumb-100">
+                          <a href="/article/{{ top.date|date:'Y' }}/{{ top.date|date:'m' }}/{{ top.date|date:'d' }}/{{ top.slug }}/">
+                            <img data-src="{{ top.photo.url }}" src="{{ top.photo.url }}" alt="" class=" lazyload">
+                          </a>
+                        </div>
+                      </div>
+                      <div class="post-list-small__body">
+                        <h3 class="post-list-small__entry-title">
+                          <a href="/article/{{ top.date|date:'Y' }}/{{ top.date|date:'m' }}/{{ top.date|date:'d' }}/{{ top.slug }}/">{{ top.title|truncatechars:70 }}</a>
+                        </h3>
+                        <ul class="entry__meta">
+                          <li class="entry__meta-author">
+                            <span>by</span>
+                            <a href="#">{{ top.user }}</a>
+                          </li>
+                          <li class="entry__meta-date">
+                            {{ top.date|date:'h:m d.m.Y' }}
+                          </li>
+                          <li class="entry__meta-date">
+                            <i class="ui-eye"></i>{{ top.views }}
+                          </li>
+                        </ul>
+                      </div>
+                    </article>
+                  </li>
+                {% endfor %}
+            </ul>           
+          </aside> <!-- end widget popular posts -->
+
+          <!-- Widget Socials -->
+          <aside class="widget widget-socials">
+            <h4 class="widget-title">Bizni ijtimoiy tarmoqlarda kuzating</h4>
+            <div class="socials socials--wide socials--large">
+              <div class="row row-16">
+                <div class="col">
+                  <a class="social social-facebook" href="#" title="facebook" target="_blank" aria-label="facebook">
+                    <i class="ui-facebook"></i>
+                    <span class="social__text">Facebook</span>
+                  </a><!--
+                  --><a class="social social-twitter" href="#" title="twitter" target="_blank" aria-label="twitter">
+                    <i class="ui-twitter"></i>
+                    <span class="social__text">Twitter</span>
+                  </a><!--
+                  --><a class="social social-youtube" href="#" title="youtube" target="_blank" aria-label="youtube">
+                    <i class="ui-youtube"></i>
+                    <span class="social__text">Youtube</span>
+                  </a>
+                </div>
+                <div class="col">
+                  <a class="social social-google-plus" href="#" title="google" target="_blank" aria-label="google">
+                    <i class="ui-google"></i>
+                    <span class="social__text">Google+</span>
+                  </a><!--
+                  --><a class="social social-instagram" href="#" title="instagram" target="_blank" aria-label="instagram">
+                    <i class="ui-instagram"></i>
+                    <span class="social__text">Instagram</span>
+                  </a><!--
+                  --><a class="social social-rss" href="#" title="rss" target="_blank" aria-label="rss">
+                    <i class="ui-rss"></i>
+                    <span class="social__text">Rss</span>
+                  </a>
+                </div>                
+              </div>            
+            </div>
+          </aside> <!-- end widget socials -->
+
+        </aside> <!-- end sidebar -->
+  
+      </div> <!-- end content -->
+    </div> <!-- end main container -->
+    {% endblock content %}

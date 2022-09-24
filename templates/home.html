@@ -1,0 +1,292 @@
+    {% extends 'base.html' %}
+    {% load static %}
+    {% block title %}
+      <title>Uzdays | Bosh Sahifa</title>
+    {% endblock title %}
+    {% block content %}
+
+    <!-- Trending Now -->
+    <div class="container">
+      <div class="trending-now">
+        <span class="trending-now__label">
+          <i class="ui-flash"></i>
+        Eng Yangi</span>
+        <div class="newsticker">
+          <ul class="newsticker__list">
+              {% for a3 in article3 %}
+                  <li class="newsticker__item"><a href="/article/{{ a3.date|date:'Y' }}/{{ a3.date|date:'m' }}/{{ a3.date|date:'d' }}/{{ a3.slug }}/" class="newsticker__item-url">{{ a3.title }}</a></li>
+              {% endfor %}
+          </ul>
+        </div>
+        <div class="newsticker-buttons">
+          <button class="newsticker-button newsticker-button--prev" id="newsticker-button--prev" aria-label="next article"><i class="ui-arrow-left"></i></button>
+          <button class="newsticker-button newsticker-button--next" id="newsticker-button--next" aria-label="previous article"><i class="ui-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured Posts Grid -->      
+    <section class="featured-posts-grid">
+      <div class="container">
+        <div class="row row-8">
+
+          <div class="col-lg-6">
+            {% for a3 in article3 %}
+                <!-- Small post -->
+                <div class="featured-posts-grid__item featured-posts-grid__item--sm">
+                  <article class="entry card post-list featured-posts-grid__entry">
+                    <div class="entry__img-holder post-list__img-holder card__img-holder" style="background-image: url({{ a3.photo.url }})">
+                      <a href="/article/{{ a3.date|date:'Y' }}/{{ a3.date|date:'m' }}/{{ a3.date|date:'d' }}/{{ a3.slug }}/" class="thumb-url"></a>
+                      <img src="{{ a3.photo.url }}" alt="" class="entry__img d-none">
+                      <a href="/article/{{ a3.date|date:'Y' }}/{{ a3.date|date:'m' }}/{{ a3.date|date:'d' }}/{{ a3.slug }}/" class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--{{ a3.category.color }}">{{ a3.category }}</a>
+                    </div>
+
+                    <div class="entry__body post-list__body card__body">
+                      <h2 class="entry__title">
+                        <a href="/article/{{ a3.date|date:'Y' }}/{{ a3.date|date:'m' }}/{{ a3.date|date:'d' }}/{{ a3.slug }}/">{{ a3.title }}</a>
+                      </h2>
+                      <ul class="entry__meta">
+                        <li class="entry__meta-author">
+                          <span>by</span>
+                          <a href="/article/{{ a3.date|date:'Y' }}/{{ a3.date|date:'m' }}/{{ a3.date|date:'d' }}/{{ a3.slug }}/">{{ a3.user }}</a>
+                        </li>
+                        <li class="entry__meta-date">
+                          {{ a3.date|date:'h:m d.m.Y' }}
+                        </li>
+                        <li class="entry__meta-date">
+                            <i class="ui-eye"></i>
+                            {{ a3.views }}
+                        </li>
+                      </ul>
+                    </div>
+                  </article>
+                </div> <!-- end post -->
+            {% endfor %}
+          </div> <!-- end col -->
+
+          <div class="col-lg-6">
+
+            <!-- Large post -->
+            <div class="featured-posts-grid__item featured-posts-grid__item--lg">
+              <article class="entry card featured-posts-grid__entry">
+                <div class="entry__img-holder card__img-holder">
+                  <a href="article.html">
+                    <img src="{{ article4.photo.url }}" alt="" class="entry__img">
+                  </a>
+                  <a href="/category/{{ article4.category }}/" class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--{{ article4.category.color }}">{{ article4.category }}</a>
+                </div>
+
+                <div class="entry__body card__body">   
+                  <h2 class="entry__title">
+                    <a href="/article/{{ article4.date|date:'Y' }}/{{ article4.date|date:'m' }}/{{ article4.date|date:'d' }}/{{ article4.slug }}/">{{ article4.title }}</a>
+                  </h2>
+                  <ul class="entry__meta">
+                    <li class="entry__meta-author">
+                      <span>by</span>
+                      <a href="">{{ article4.user }}</a>
+                    </li>
+                    <li class="entry__meta-date">
+                      {{ article4.date|date:'h:m d.m.Y' }}
+                    </li>
+                    <li class="entry__meta-date">
+                        <i class="ui-eye"></i>
+                        {{ article4.views }}
+                    </li>
+                  </ul>
+                </div>
+              </article>
+            </div> <!-- end large post -->
+          </div>          
+
+        </div>
+      </div>
+    </section> <!-- end featured posts grid -->
+
+    <div class="main-container container pt-24" id="main-container">         
+
+      <!-- Content -->
+      <div class="row">
+
+        <!-- Posts -->
+        <div class="col-lg-8 blog__content mb-72">
+
+          <!-- Worldwide News -->
+          <section class="section title-wrap--line">
+            {% for article in article15 %}
+                <article class="entry card post-list">
+                  <div class="entry__img-holder post-list__img-holder card__img-holder" style="background-image: url({{ article.photo.url }})">
+                    <a href="/article/{{ article.date|date:'Y' }}/{{ article.date|date:'m' }}/{{ article.date|date:'d' }}/{{ article.slug }}/" class="thumb-url"></a>
+                    <img src="{{ article.phone.url }}" alt="" class="entry__img d-none">
+                    <a href="category.html" class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--{{ article.category.color }}">{{ article.category }}</a>
+                  </div>
+
+                  <div class="entry__body post-list__body card__body">
+                    <div class="entry__header">
+                      <h2 class="entry__title">
+                        <a href="/article/{{ article.date|date:'Y' }}/{{ article.date|date:'m' }}/{{ article.date|date:'d' }}/{{ article.slug }}/">{{ article.title }}</a>
+                      </h2>
+                      <ul class="entry__meta">
+                        <li class="entry__meta-author">
+                          <span>by</span>
+                          <a href="">{{ article.user }}</a>
+                        </li>
+                        <li class="entry__meta-date">
+                          {{ article.date|date:'h:m d.m.Y' }}
+                        </li>
+                        <li class="entry__meta-date">
+                          <i class="ui-eye"></i>{{ article.views }}
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="entry__excerpt">
+                      <p>iPrice Group report offers insights on daily e-commerce activity in the ...</p>
+                    </div>
+                  </div>
+                </article>
+            {% endfor %}
+
+          </section> <!-- end worldwide news -->
+
+            <!-- Pagination -->
+            {% if article15.has_other_pages %}
+              <nav class="pagination">
+                {% if article15.has_previous %}
+                    <a href="?page={{ article15.previous_page_number }}" class="pagination__page pagination__icon pagination__page--previous"><i class="ui-arrow-left"></i></a>
+                {% else %}
+                {% endif %}
+                {% for i in article15.paginator.page_range %}
+                  {% if article15.number == i %}
+                      <span class="pagination__page pagination__page--current">{{ i }}</span>
+                  {% else %}
+                      <a href="?page={{ i }}" class="pagination__page">{{ i }}</a>
+                  {% endif %}
+                {% endfor %}
+                {% if article15.has_next %}
+                    <a href="?page={{ article15.next_page_number }}" class="pagination__page pagination__icon pagination__page--next"><i class="ui-arrow-right"></i></a>
+                {% else %}
+                {% endif %}
+              </nav>
+            {% endif %}
+
+        </div> <!-- end posts -->
+
+        <!-- Sidebar -->
+        <aside class="col-lg-4 sidebar sidebar--right">
+
+          <!-- Widget Popular Posts -->
+          <aside class="widget widget-popular-posts">
+            <h4 class="widget-title">Ko'p ko'rilganlar</h4>
+            <ul class="post-list-small">
+                {% for view in views5 %}
+                    <li class="post-list-small__item">
+                        <article class="post-list-small__entry clearfix">
+                          <div class="post-list-small__img-holder">
+                            <div class="thumb-container thumb-100">
+                              <a href="/article/{{ view.date|date:'Y' }}/{{ view.date|date:'m' }}/{{ view.date|date:'d' }}/{{ view.slug }}/">
+                                <img data-src="{{ view.photo.url }}" src="{{ view.photo.url }}" alt="" class="post-list-small__img--rounded lazyload">
+                              </a>
+                            </div>
+                          </div>
+                          <div class="post-list-small__body">
+                            <h3 class="post-list-small__entry-title">
+                              <a href="/article/{{ view.date|date:'Y' }}/{{ view.date|date:'m' }}/{{ view.date|date:'d' }}/{{ view.slug }}/">{{ view.title }}</a>
+                            </h3>
+                            <ul class="entry__meta">
+                              <li class="entry__meta-author">
+                                <span>by</span>
+                                <a href="">{{ view.user }}</a>
+                              </li>
+                              <li class="entry__meta-date">
+                                {{ view.date|date:'h:m d.m.Y' }}
+                              </li>
+                              <li class="entry__meta-date">
+                                  <i class="ui-eye"></i>{{ view.views }}
+                              </li>
+                            </ul>
+                          </div>
+                        </article>
+                    </li>
+                {% endfor %}
+            </ul>           
+          </aside> <!-- end widget popular posts -->
+
+          <!-- Widget Socials -->
+          <aside class="widget widget-socials">
+            <h4 class="widget-title">Ijtimoiy tarmoqlarimiz</h4>
+            <div class="socials socials--wide socials--large">
+              <div class="row row-16">
+                <div class="col">
+                  <a class="social social-instagram" href="#" title="instagram" target="_blank" aria-label="instagram">
+                    <i class="fa fa-instagram"></i>
+                    <span class="social__text">Instagram</span>
+                  </a>
+                  <a class="social social-facebook" href="#" title="facebook" target="_blank" aria-label="facebook">
+                    <i class="fa fa-facebook"></i>
+                    <span class="social__text">Facebook</span>
+                  </a>
+                  <a class="social social-youtube" href="#" title="youtube" target="_blank" aria-label="youtube">
+                    <i class="fa fa-youtube"></i>
+                    <span class="social__text">Youtube</span>
+                  </a>
+                </div>
+                <div class="col">
+                  <a class="social social-twitter" href="#" title="telegram" target="_blank" aria-label="telegram">
+                    <i class="fa fa-telegram"></i>
+                    <span class="social__text">Telegram</span>
+                  </a>
+                  <a class="social social-twitter" href="#" title="twitter" target="_blank" aria-label="twitter">
+                    <i class="fa fa-twitter"></i>
+                    <span class="social__text">Twitter</span>
+                  </a>
+                  <a class="social social-google-plus" href="#" title="google" target="_blank" aria-label="google">
+                    <i class="fa fa-google"></i>
+                    <span class="social__text">Google+</span>
+                  </a>
+                </div>                
+              </div>            
+            </div>
+          </aside> <!-- end widget socials -->
+        <!-- Widget Ad 300 -->
+          <aside class="widget widget_media_image">
+            <a href="#">
+              <img src="{% static 'img/content/placeholder_336.jpg'%}" alt="">
+            </a>
+          </aside> <!-- end widget ad 300 -->
+        </aside> <!-- end sidebar -->
+
+      </div> <!-- end content -->
+
+      <!-- Ad Banner 728 -->
+      <div class="text-center pb-48">
+        <a href="">
+          <img src="{% static 'img/content/placeholder_728.jpg'%}" alt="">
+        </a>
+      </div>
+
+      <!-- Carousel posts -->
+      <section class="section mb-0">
+        <div class="title-wrap title-wrap--line title-wrap--pr">
+          <h3 class="section-title">Ko'p ko'rilganlar</h3>
+        </div>
+
+        <!-- Slider -->
+        <div id="owl-posts" class="owl-carousel owl-theme owl-carousel--arrows-outside">
+            {% for view in views10 %}
+                <article class="entry thumb thumb--size-1">
+                    <div class="entry__img-holder thumb__img-holder" style="background-image: url('{{ view.photo.url }}');">
+                      <div class="bottom-gradient"></div>
+                      <div class="thumb-text-holder">
+                        <h2 class="thumb-entry-title">
+                          <a href="/article/{{ view.date|date:'Y' }}/{{ view.date|date:'m' }}/{{ view.date|date:'d' }}/{{ view.slug }}/">{{ view.title }}</a>
+                        </h2>
+                      </div>
+                      <a href="/article/{{ view.date|date:'Y' }}/{{ view.date|date:'m' }}/{{ view.date|date:'d' }}/{{ view.slug }}/" class="thumb-url"></a>
+                    </div>
+                </article>
+            {% endfor %}
+        </div> <!-- end slider -->
+
+      </section> <!-- end carousel posts -->
+
+    </div> <!-- end main container -->
+    {% endblock content %}

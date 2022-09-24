@@ -1,0 +1,33 @@
+    {% extends 'base.html' %}
+    {% load static %}
+    {% block title %}
+      <title>Uzdays | Biz Haqimizda</title>
+    {% endblock title %}
+    {% block content %}
+    <!-- Breadcrumbs -->
+    <div class="container">
+      <ul class="breadcrumbs">
+        <li class="breadcrumbs__item">
+          <a href="/" class="breadcrumbs__url">Bosh Sahifa</a>
+        </li>
+        <li class="breadcrumbs__item breadcrumbs__item--current">
+          UzDays Haqida
+        </li>
+      </ul>
+    </div>
+
+    <div class="main-container container" id="main-container">            
+      <!-- post content -->
+      <div class="blog__content mb-72">
+        <h1 class="page-title text-center">UzDays</h1>
+        <img src="{% static 'img/content/about/about_bg.jpg'%}" class="page-featured-img">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="entry__article">
+              {% autoescape off %}{{ aboutus.text }}{% endautoescape off %}
+            </div>
+          </div>
+        </div>
+      </div> <!-- end post content -->
+    </div> <!-- end main container -->
+    {% endblock content %}

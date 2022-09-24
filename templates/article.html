@@ -1,0 +1,201 @@
+    {% extends 'base.html' %}
+    {% load static %}
+    {% block title %}
+      <title>Uzdays | {{ article.title }}</title>
+    {% endblock title %}
+    {% block content %}
+    <!-- Breadcrumbs -->
+    <div class="container">
+      <ul class="breadcrumbs">
+        <li class="breadcrumbs__item">
+          <a href="/" class="breadcrumbs__url">Bosh Sahifa</a>
+        </li>
+        <li class="breadcrumbs__item">
+          <a href="/category/{{ article.category }}/" class="breadcrumbs__url">{{ article.category }}</a>
+        </li>
+        <li class="breadcrumbs__item breadcrumbs__item--current">
+          {{ article.title }}
+        </li>
+      </ul>
+    </div>
+
+    <div class="main-container container" id="main-container">
+
+      <!-- Content -->
+      <div class="row">
+            
+        <!-- post content -->
+        <div class="col-lg-8 blog__content mb-72">
+          <div class="content-box">           
+
+            <!-- standard post -->
+            <article class="entry mb-0">
+              
+              <div class="single-post__entry-header entry__header">
+                <a href="category.html" class="entry__meta-category entry__meta-category--label entry__meta-category--green">{{ article.category }}</a>
+                <h1 class="single-post__entry-title">
+                  {{ article.title }}
+                </h1>
+
+                <div class="entry__meta-holder">
+                  <ul class="entry__meta">
+                    <li class="entry__meta-author">
+                      <span>by</span>
+                      <a href="#">{{ article.user }}</a>
+                    </li>
+                    <li class="entry__meta-date">
+                      {{ article.date|date:'h:m d.m.y' }}
+                  </ul>
+                  <ul class="entry__meta">
+                    <li class="entry__meta-views">
+                      <i class="ui-eye"></i>
+                      <span>{{ article.views }}</span>
+                    </li>
+{#                    <li class="entry__meta-comments">#}
+{#                      <a href="#">#}
+{#                        <i class="ui-chat-empty"></i>13#}
+{#                      </a>#}
+{#                    </li>#}
+                  </ul>
+                </div>
+              </div> <!-- end entry header -->
+
+              <div class="entry__img-holder">
+                <img src="{{ article.photo.url }}" alt="" class="entry__img">
+              </div>
+
+              <div class="entry__article-wrap">
+
+                <!-- Share -->
+                <div class="entry__share">
+                  <div class="sticky-col">
+                    <div class="socials socials--rounded socials--large">
+                      <a class="social social-facebook" href="#" title="facebook" target="_blank" aria-label="facebook">
+                        <i class="ui-facebook"></i>
+                      </a>
+                      <a class="social social-twitter" href="#" title="twitter" target="_blank" aria-label="twitter">
+                        <i class="ui-twitter"></i>
+                      </a>
+                      <a class="social social-google-plus" href="#" title="google" target="_blank" aria-label="google">
+                        <i class="ui-google"></i>
+                      </a>
+                      <a class="social social-pinterest" href="#" title="pinterest" target="_blank" aria-label="pinterest">
+                        <i class="ui-pinterest"></i>
+                      </a>
+                    </div>
+                  </div>                  
+                </div> <!-- share -->
+
+                <div class="entry__article">
+                  <p>{% autoescape off %}{{ article.text }}{% endautoescape off %}</p>
+
+                </div> <!-- end entry article -->
+              </div> <!-- end entry article wrap -->
+
+              <!-- Prev / Next Post -->
+              <nav class="entry-navigation">
+                <div class="clearfix">
+                  <div class="entry-navigation--left">
+                    <i class="ui-arrow-left"></i>
+                    <span class="entry-navigation__label">Avvlagi</span>
+                    <div class="entry-navigation__link">
+                      <a href="/article/{{ top.date|date:'Y' }}/{{ top.date|date:'m' }}/{{ top.date|date:'d' }}/{{ previous.slug }}/" rel="next">{{ previous.title }}</a>
+                    </div>
+                  </div>
+                  <div class="entry-navigation--right">
+                    <span class="entry-navigation__label">Keyingi</span>
+                    <i class="ui-arrow-right"></i>
+                    <div class="entry-navigation__link">
+                      <a href="/article/{{ top.date|date:'Y' }}/{{ top.date|date:'m' }}/{{ top.date|date:'d' }}/{{ next.slug }}/" rel="prev">{{ next.title }}</a>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+
+            </article> <!-- end standard post -->
+
+          </div> <!-- end content box -->
+        </div> <!-- end post content -->
+        
+        <!-- Sidebar -->
+        <aside class="col-lg-4 sidebar sidebar--right">
+
+          <!-- Widget Popular Posts -->
+          <aside class="widget widget-popular-posts">
+            <h4 class="widget-title">Dolzarb mavzular</h4>
+            <ul class="post-list-small">
+                {% for top in top_articles %}
+                  <li class="post-list-small__item">
+                    <article class="post-list-small__entry clearfix">
+                      <div class="post-list-small__img-holder">
+                        <div class="thumb-container thumb-100">
+                          <a href="/article/{{ top.date|date:'Y' }}/{{ top.date|date:'m' }}/{{ top.date|date:'d' }}/{{ top.slug }}/">
+                            <img data-src="{{ top.photo.url }}" src="{{ top.photo.url }}" alt="" class=" lazyload">
+                          </a>
+                        </div>
+                      </div>
+                      <div class="post-list-small__body">
+                        <h3 class="post-list-small__entry-title">
+                          <a href="/article/{{ top.date|date:'Y' }}/{{ top.date|date:'m' }}/{{ top.date|date:'d' }}/{{ top.slug }}/">{{ top.title|truncatechars:70 }}</a>
+                        </h3>
+                        <ul class="entry__meta">
+                          <li class="entry__meta-author">
+                            <span>by</span>
+                            <a href="#">{{ top.user }}</a>
+                          </li>
+                          <li class="entry__meta-date">
+                            {{ top.date|date:'h:m d.m.Y' }}
+                          </li>
+                          <li class="entry__meta-date">
+                            <i class="ui-eye"></i>{{ top.views }}
+                          </li>
+                        </ul>
+                      </div>
+                    </article>
+                  </li>
+                {% endfor %}
+            </ul>           
+          </aside> <!-- end widget popular posts -->
+
+          <!-- Widget Socials -->
+          <aside class="widget widget-socials">
+            <h4 class="widget-title">Let's hang out on social</h4>
+            <div class="socials socials--wide socials--large">
+              <div class="row row-16">
+                <div class="col">
+                  <a class="social social-facebook" href="#" title="facebook" target="_blank" aria-label="facebook">
+                    <i class="ui-facebook"></i>
+                    <span class="social__text">Facebook</span>
+                  </a><!--
+                  --><a class="social social-twitter" href="#" title="twitter" target="_blank" aria-label="twitter">
+                    <i class="ui-twitter"></i>
+                    <span class="social__text">Twitter</span>
+                  </a><!--
+                  --><a class="social social-youtube" href="#" title="youtube" target="_blank" aria-label="youtube">
+                    <i class="ui-youtube"></i>
+                    <span class="social__text">Youtube</span>
+                  </a>
+                </div>
+                <div class="col">
+                  <a class="social social-google-plus" href="#" title="google" target="_blank" aria-label="google">
+                    <i class="ui-google"></i>
+                    <span class="social__text">Google+</span>
+                  </a><!--
+                  --><a class="social social-instagram" href="#" title="instagram" target="_blank" aria-label="instagram">
+                    <i class="ui-instagram"></i>
+                    <span class="social__text">Instagram</span>
+                  </a><!--
+                  --><a class="social social-rss" href="#" title="rss" target="_blank" aria-label="rss">
+                    <i class="ui-rss"></i>
+                    <span class="social__text">Rss</span>
+                  </a>
+                </div>                
+              </div>            
+            </div>
+          </aside> <!-- end widget socials -->
+
+        </aside> <!-- end sidebar -->
+      
+      </div> <!-- end content -->
+    </div> <!-- end main container -->
+    {% endblock content %}

@@ -1,0 +1,39 @@
+    {% extends 'base.html' %}
+    {% load static %}
+    {% block title %}
+      <title>Uzdays | Login</title>
+    {% endblock title %}
+    {% block content %}
+    <div class="main-container container pt-80 pb-80" id="main-container">
+      <!-- post content -->
+      <div class="blog__content mb-72">
+        <div class="container text-center">
+
+          <div class="row justify-content-center mt-40">
+
+            <div class="col-md-6">
+
+              <!-- Back to home -->
+              <a href="" class="btn btn-lg btn-light mt-40"><span>Kirish</span></a>
+                <!-- Contact Form -->
+                <form class="contact-form" method="post" action="/manage/login/">
+                    {% csrf_token %}
+                  <div class="contact-name">
+                    <label for="username">Login <abbr title="required" class="required">*</abbr></label>
+                    <input name="username" id="username" type="text">
+                  </div>
+                  <div class="contact-name">
+                    <label for="password">Parol <abbr title="required" class="required">*</abbr></label>
+                    <input name="password" id="password" type="text">
+                  </div>
+
+                  <input type="submit" class="btn btn-lg btn-color btn-button" value="Kirish">
+                </form>
+            </div>
+
+          </div> <!-- end row -->
+
+        </div> <!-- end container -->
+      </div> <!-- end post content -->
+    </div> <!-- end main container -->
+    {% endblock content %}
